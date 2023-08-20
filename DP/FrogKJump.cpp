@@ -6,7 +6,6 @@ class solution{
     public:
 
     int FrogK(int n,vector<int> &arr,int k,vector<int> &dp){
-
         if(n==0){
             return 0;
         }
@@ -15,19 +14,16 @@ class solution{
             return dp[n];
         }
 
-        int mmStep=INT_MAX;
+        int minSteps=INT_MAX;
 
         for(int i=1;i<=k;i++){
-            
-
-            if(n-i>=0){
-                int left = FrogK(n-i, arr, k, dp)+ abs(arr[n]- arr[n-i]);
-                mmStep=min(mmStep,left);
+            if(n-i>0){
+                int jump= FrogK(n-i,arr,k,dp)+ abs(dp[n]-dp[n-i]);
+                minSteps=min(jump,minSteps);
             }
         }
 
-        return dp[n]=mmStep;
-
+        return dp[n]=minSteps;
     }
 
     int solve(int n,vector<int> arr,int k){
